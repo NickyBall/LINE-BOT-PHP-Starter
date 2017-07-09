@@ -1,5 +1,8 @@
 <?php
 
+
+namespace MicrosoftAzure\Storage\Samples;
+
 // require __DIR__."/vendor/autoload.php";
 require_once "vendor/autoload.php";
 
@@ -8,7 +11,8 @@ use MicrosoftAzure\Storage\Common\ServicesBuilder;
 use MicrosoftAzure\Storage\Common\Exceptions\ServiceException;
 
 
-$connectionString = 'DefaultEndpointsProtocol=https;AccountName=roundplatform;AccountKey=4TIBx0yc648KFnuMsLjXMoT/IqFfCW3/X5ZhzifcKBEydn5qxYY2741M9krgp7wDu2JW1/AD1PyCMspywUYKuw==;EndpointSuffix=core.windows.net';
+// $connectionString = 'DefaultEndpointsProtocol=https;AccountName=roundplatform;AccountKey=4TIBx0yc648KFnuMsLjXMoT/IqFfCW3/X5ZhzifcKBEydn5qxYY2741M9krgp7wDu2JW1/AD1PyCMspywUYKuw==;EndpointSuffix=core.windows.net';
+$connectionString = 'DefaultEndpointsProtocol=https;AccountName=roundplatform;AccountKey=GEodu+9psNmilnxS1Kj+XMkUiVPrQ4I+uAbQGi72gms1bq85lchsRMhw2587bairl2II9lULG+8fKrs/fZQ5eQ==;EndpointSuffix=core.windows.net';
 $tableClient = ServicesBuilder::getInstance()->createTableService($connectionString);
 
 $filter = "PartitionKey eq '3097272744648780' and RowKey eq '3097272744648580'";
