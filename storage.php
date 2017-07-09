@@ -15,7 +15,9 @@ use MicrosoftAzure\Storage\Common\Exceptions\ServiceException;
 $connectionString = 'DefaultEndpointsProtocol=https;AccountName=roundplatform;AccountKey=GEodu+9psNmilnxS1Kj+XMkUiVPrQ4I+uAbQGi72gms1bq85lchsRMhw2587bairl2II9lULG+8fKrs/fZQ5eQ==';
 $tableClient = ServicesBuilder::getInstance()->createTableService($connectionString);
 
-$filter = "PartitionKey eq '3097272744648780' and RowKey eq '3097272744648580'";
+$partitionKey = $_GET['partitionkey'];
+
+$filter = "PartitionKey eq '".$partitionKey."'";
 
 try    {
     $result = $tableClient->queryEntities("RPxShopCreditData", $filter);
