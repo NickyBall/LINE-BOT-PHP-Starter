@@ -23,10 +23,10 @@ class Storage {
   }
 
   public function getCurrentShopCredit($partitionkey) {
-    $filter = "PartitionKey eq '".$partitionKey."'";
+    $filter = "PartitionKey eq '".$partitionkey."'";
 
     try    {
-        $result = $tableClient->queryEntities("RPxShopCreditData", $filter);
+        $result = $this->tableClient->queryEntities("RPxShopCreditData", $filter);
     }
     catch(ServiceException $e){
         // Handle exception based on error codes and messages.
