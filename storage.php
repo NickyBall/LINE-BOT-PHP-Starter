@@ -43,7 +43,7 @@ class Storage {
     //     echo $entity->getPartitionKey().":".$entity->getRowKey()."<br />";
     // }
 
-    return $entities[0]->getNewBalance();
+    return $entities[0]->getPropertyValue("NewBalance");
   }
 }
 
