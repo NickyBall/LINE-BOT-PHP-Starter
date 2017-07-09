@@ -19,7 +19,7 @@ class Storage {
   {
     // $connectionString = 'DefaultEndpointsProtocol=https;AccountName=roundplatform;AccountKey=4TIBx0yc648KFnuMsLjXMoT/IqFfCW3/X5ZhzifcKBEydn5qxYY2741M9krgp7wDu2JW1/AD1PyCMspywUYKuw==;EndpointSuffix=core.windows.net';
     $this->connectionString = 'DefaultEndpointsProtocol=https;AccountName=roundplatform;AccountKey=GEodu+9psNmilnxS1Kj+XMkUiVPrQ4I+uAbQGi72gms1bq85lchsRMhw2587bairl2II9lULG+8fKrs/fZQ5eQ==';
-    $this->tableClient = ServicesBuilder::getInstance()->createTableService($connectionString);
+    $this->tableClient = ServicesBuilder::getInstance()->createTableService($this->connectionString);
   }
 
   public function getCurrentShopCredit($partitionkey) {
