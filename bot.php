@@ -1,6 +1,23 @@
 <?php
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('<channel access token>');
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '<channel secret>']);
 
-$response = $bot->replyText('<reply token>', 'hello!');
+define("LINE_MESSAGING_API_CHANNEL_SECRET", 'your channel secret');
+define("LINE_MESSAGING_API_CHANNEL_TOKEN", 'your channel token');
+
+require __DIR__."/../vendor/autoload.php";
+
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]);
+
+$signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+$body = file_get_contents("php://input");
+
+$events = $bot->parseEventRequest($body, $signature);
+
+foreach ($events as $event) {
+    if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
+        $reply_token = $event->getReplyToken();
+        $text = $event->getText();
+        $bot->replyText($reply_token, $text);
+    }
+}
 ?>
