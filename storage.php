@@ -1,11 +1,9 @@
 <?php
 
-namespace MicrosoftAzure\Storage\Samples;
-
 require __DIR__."/vendor/autoload.php";
 
-use MicrosoftAzure\Storage\Common\ServicesBuilder;
-use MicrosoftAzure\Storage\Common\ServiceException;
+use \MicrosoftAzure\Storage\Common\ServicesBuilder;
+use \MicrosoftAzure\Storage\Common\ServiceException;
 
 
 $connectionString = 'DefaultEndpointsProtocol=https;AccountName=roundplatform;AccountKey=4TIBx0yc648KFnuMsLjXMoT/IqFfCW3/X5ZhzifcKBEydn5qxYY2741M9krgp7wDu2JW1/AD1PyCMspywUYKuw==;EndpointSuffix=core.windows.net';
