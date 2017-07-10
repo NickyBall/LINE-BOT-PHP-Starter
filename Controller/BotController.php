@@ -2,15 +2,12 @@
 
 namespace Controller;
 
+require __DIR__."../vendor/autoload.php";
+
 define("LINE_MESSAGING_API_CHANNEL_SECRET", 'a0f51fe1778dbb3a68f7774658ecedab');
 define("LINE_MESSAGING_API_CHANNEL_TOKEN", 'Vi4bbR+WBZQcF2HtY3T2YEsH9Y9Ub/c3rVM3E/9M+0C7uIDyLw0YhApZ81FHlBb+9zUHgXeY7SfUIxA+3aA5h57ldvi++ux2wvb/vfHOZ/3wTJJOC+SRNWcOT48iIfdrWFKLQw58geBBbRdZ0ND9tQdB04t89/1O/w1cDnyilFU=');
 
 class BotController {
-
-
-
-  require __DIR__."../vendor/autoload.php";
-
   protected $httpClient;
   protected $bot;
   protected $signature;
