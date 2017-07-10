@@ -15,8 +15,8 @@ class BotController {
   protected $body;
 
   public function __construct() {
-    $this->httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
-    $this->bot = new \LINE\LINEBot($this->httpClient, ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]);
+    $this->httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($this->LINE_MESSAGING_API_CHANNEL_TOKEN);
+    $this->bot = new \LINE\LINEBot($this->httpClient, ['channelSecret' => $this->LINE_MESSAGING_API_CHANNEL_SECRET]);
 
     $this->signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
   }
