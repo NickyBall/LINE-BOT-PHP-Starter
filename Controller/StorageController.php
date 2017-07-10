@@ -59,7 +59,7 @@ class StorageController {
     $entity->addProperty("Operation", EdmType::STRING, "เติมเครดิต");
     $entity->addProperty("ActionCredit", EdmType::INT32, 1);
     try {
-        $tableClient->insertEntity("RPxShopCreditData", $entity);
+        $this->tableClient->insertEntity("RPxShopCreditData", $entity);
         return true;
     } catch (ServiceException $e) {
         $code = $e->getCode();
