@@ -52,7 +52,12 @@ class BotController {
         if (sizeof($splits) != 4) return "Your Command is not correct.";
         $shop = $splits[2];
         $amount = $splits[3];
-        return $storage->topupShop($shop, $amount) ? "Complete" : "Fail";
+        if ($storage->topupShop($shop, $amount)) {
+          $new_balance = $storage->getCurrentShopCredit($shop);
+          return "Topup Completed. \n".$shop." now has ".$new_balance." credits";
+        } else {
+          return "Something went wrong.\nPlease try again later";
+        }
       } else {
         return $text;
       }

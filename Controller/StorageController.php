@@ -51,9 +51,10 @@ class StorageController {
   public function topupShop($shopId, $amount) {
     $oldBalance = $this->getCurrentShopCredit($shopId);
     $newBalance = intval($oldBalance) + intval($amount);
+    $rowKey = $this->getKeyTime();
     $entity = new Entity();
     $entity->setPartitionKey($shopId);
-    $entity->setRowKey("1");
+    $entity->setRowKey($rowKey);
     $entity->addProperty("NewBalance", EdmType::INT32, $newBalance);
     $entity->addProperty("OldBalance", EdmType::INT32, $oldBalance);
     $entity->addProperty("Operation", EdmType::STRING, "เติมเครดิต");
@@ -67,6 +68,12 @@ class StorageController {
         echo $code.": ".$error_message.PHP_EOL;
         return false;
     }
+  }
+
+  protected function getKeyTime() {
+    $limit_date = new DateTime("2999-1-1 00:00:00");
+    $diff = (float) $limit_date->getTimeStamp()*10000 - microtime(true)*10000;
+    return number_format($diff,0,"","") . "0";
   }
 
 
