@@ -41,11 +41,18 @@ class BotController {
     $splits = explode(" ", $text);
     if ($splits[0] == 'BOT' && sizeof($splits) > 1) {
       $command = $splits[1];
+      $storage = new StorageController();
       if ($command == 'balance') {
+        if (sizeof($splits) != 3) return "Your Command is not correct.";
         $shop = $splits[2];
-        $storage = new StorageController();
         $balance = $storage->getCurrentShopCredit($shop);
-        return $balance;
+        $result = $shop . " balance is ".$balance;
+        return $result;
+      } else if ($command == 'topup') {
+        if (sizeof($splits) != 4) return "Your Command is not correct.";
+        $shop = $splits[2];
+        $amount = $splits[3];
+        return $storage->topupShop($shop, $balance) ? "Complete" : "Fail";
       } else {
         return $text;
       }

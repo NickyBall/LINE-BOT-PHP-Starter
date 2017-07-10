@@ -9,6 +9,8 @@ require_once "vendor/autoload.php";
 use MicrosoftAzure\Storage\Common\ServicesBuilder;
 // use MicrosoftAzure\Storage\Common\ServiceException;
 use MicrosoftAzure\Storage\Common\Exceptions\ServiceException;
+use MicrosoftAzure\Storage\Table\Models\Entity;
+use MicrosoftAzure\Storage\Table\Models\EdmType;
 
 class StorageController {
 
@@ -45,6 +47,29 @@ class StorageController {
 
     return $entities[0]->getPropertyValue("NewBalance");
   }
+
+  public function topupShop($shopId, $amount) {
+    $oldBalance = $this->getCurrentShopCredit($shopId);
+    $newBalance = intval($oldBalance) + intval($amount);
+    $entity = new Entity();
+    $entity->setPartitionKey($shopId);
+    $entity->setRowKey("1");
+    $entity->addProperty("NewBalance", EdmType::INT32, $newBalance);
+    $entity->addProperty("OldBalance", EdmType::INT32, $oldBalance);
+    $entity->addProperty("Operation", EdmType::STRING, "เติมเครดิต");
+    $entity->addProperty("ActionCredit", EdmType::INT32, 1);
+    try {
+        $tableClient->insertEntity("RPxShopCreditData", $entity);
+        return true;
+    } catch (ServiceException $e) {
+        $code = $e->getCode();
+        $error_message = $e->getMessage();
+        echo $code.": ".$error_message.PHP_EOL;
+        return false;
+    }
+  }
+
+
 }
 
 ?>
