@@ -20,7 +20,7 @@ class BotController {
     $this->signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
   }
 
-  protected function parseEvent($body) {
+  public function parseEvent($body) {
     $events = $this->bot->parseEventRequest($body, $this->signature);
 
     foreach ($events as $event) {
