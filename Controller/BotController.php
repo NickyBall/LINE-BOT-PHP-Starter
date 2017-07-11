@@ -4,8 +4,10 @@ namespace Controller;
 
 require __DIR__."/../vendor/autoload.php";
 require __DIR__."/StorageController.php";
+require __DIR__."/../Service/ShareService.php";
 
 use Controller\StorageController;
+use Service\ShareService;
 
 define("LINE_MESSAGING_API_CHANNEL_SECRET", 'a0f51fe1778dbb3a68f7774658ecedab');
 define("LINE_MESSAGING_API_CHANNEL_TOKEN", 'Vi4bbR+WBZQcF2HtY3T2YEsH9Y9Ub/c3rVM3E/9M+0C7uIDyLw0YhApZ81FHlBb+9zUHgXeY7SfUIxA+3aA5h57ldvi++ux2wvb/vfHOZ/3wTJJOC+SRNWcOT48iIfdrWFKLQw58geBBbRdZ0ND9tQdB04t89/1O/w1cDnyilFU=');
@@ -25,12 +27,13 @@ class BotController {
 
   public function parseEvent($body) {
     $events = $this->bot->parseEventRequest($body, $this->signature);
+    ShareService::log("Event msg: ".$events."\n");
 
     foreach ($events as $event) {
         if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
             $reply_token = $event->getReplyToken();
             $text = $event->getText();
-            file_put_contents("php://stdout", "input msg :".$text."\n");
+            ShareService::log("Input Text: ".$text."\n");
             $result = $this->decodeText($text);
             $this->bot->replyText($reply_token, $result);
         }
