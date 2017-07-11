@@ -30,6 +30,7 @@ class BotController {
 
     foreach ($events as $event) {
         if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
+            ShareService::log("Event msg: ".$event."\n");
             $reply_token = $event->getReplyToken();
             $text = $event->getText();
             ShareService::log("Input Text: ".$text."\n");
