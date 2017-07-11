@@ -30,6 +30,7 @@ class BotController {
         if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
             $reply_token = $event->getReplyToken();
             $text = $event->getText();
+            file_put_contents("php://stdout", "input msg :".$text."\n");
             $result = $this->decodeText($text);
             $this->bot->replyText($reply_token, $result);
         }
