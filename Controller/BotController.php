@@ -27,7 +27,6 @@ class BotController {
 
   public function parseEvent($body) {
     $events = $this->bot->parseEventRequest($body, $this->signature);
-    ShareService::log("Event msg: ".$events."\n");
 
     foreach ($events as $event) {
         if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
